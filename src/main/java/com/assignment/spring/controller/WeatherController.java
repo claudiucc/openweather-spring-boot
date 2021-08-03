@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,9 +21,9 @@ public class WeatherController {
 
     private WeatherService weatherService;
 
-    @RequestMapping("/weather")
+    @GetMapping("/weather")
     public ResponseEntity<WeatherDTO> weather(HttpServletRequest request,
-                                                 @RequestParam("city") String city) throws Exception {
+                                              @RequestParam("city") String city) throws Exception {
         WeatherDTO weatherDTO = weatherService.findWeatherInfoByCity(city);
 
         if(weatherDTO == null)
