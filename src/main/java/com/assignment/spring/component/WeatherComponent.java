@@ -3,7 +3,6 @@ package com.assignment.spring.component;
 
 import com.assignment.spring.api.model.WeatherResponse;
 import com.assignment.spring.api.util.AppConstants;
-import com.assignment.spring.entity.WeatherEntity;
 import com.assignment.spring.exceptionhandler.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
