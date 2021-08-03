@@ -4,6 +4,7 @@ package com.assignment.spring.component;
 import com.assignment.spring.api.model.WeatherResponse;
 import com.assignment.spring.api.util.AppConstants;
 import com.assignment.spring.entity.WeatherEntity;
+import com.assignment.spring.exceptionhandler.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
@@ -43,7 +44,7 @@ public class WeatherComponent {
             log.info("WeatherComponent.findWeatherInfoByCity OpenWeather API responded: {}", response.getBody());
         } catch (Exception e) {
             log.error("WeatherComponent.findWeatherInfoByCity: OpenWeather API responded: {}", e.getMessage());
-            throw e;
+            throw new ResourceNotFoundException("Weather info was not found for city: " + city);
         }
 
         return response.getBody();

@@ -15,6 +15,12 @@ public class WeatherService {
     private final WeatherRepository weatherRepository;
 
     public WeatherEntity findWeatherInfoByCity(String city) throws Exception {
+        WeatherEntity weatherEntity = WeatherEntityMapper.map(weatherComponent.findWeatherInfoByCity(city));
+        saveWeatherInfo(weatherEntity);
         return WeatherEntityMapper.map(weatherComponent.findWeatherInfoByCity(city));
+    }
+
+    public WeatherEntity saveWeatherInfo(WeatherEntity entity) {
+        return weatherRepository.save(entity);
     }
 }
