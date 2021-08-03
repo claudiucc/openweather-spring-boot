@@ -1,6 +1,6 @@
 package com.assignment.spring.controller;
 
-import com.assignment.spring.entity.WeatherEntity;
+import com.assignment.spring.api.model.WeatherDTO;
 import com.assignment.spring.exceptionhandler.ResourceNotFoundException;
 import com.assignment.spring.service.WeatherService;
 import lombok.AllArgsConstructor;
@@ -21,13 +21,13 @@ public class WeatherController {
     private WeatherService weatherService;
 
     @RequestMapping("/weather")
-    public ResponseEntity<WeatherEntity> weather(HttpServletRequest request,
+    public ResponseEntity<WeatherDTO> weather(HttpServletRequest request,
                                                  @RequestParam("city") String city) throws Exception {
-        WeatherEntity entity = weatherService.findWeatherInfoByCity(city);
+        WeatherDTO weatherDTO = weatherService.findWeatherInfoByCity(city);
 
-        if(entity == null)
+        if(weatherDTO == null)
             throw new ResourceNotFoundException("Weather info was not found for city: " + city);
 
-        return new ResponseEntity<WeatherEntity>(entity, HttpStatus.OK);
+        return new ResponseEntity<WeatherDTO>(weatherDTO, HttpStatus.OK);
     }
 }
