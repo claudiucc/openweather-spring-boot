@@ -1,6 +1,7 @@
 package com.assignment.spring;
 
 import com.assignment.spring.api.WeatherResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,12 +11,10 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
+@AllArgsConstructor
 public class WeatherController {
 
-    @Autowired
     private RestTemplate restTemplate;
-
-    @Autowired
     private WeatherRepository weatherRepository;
 
     @RequestMapping("/weather")

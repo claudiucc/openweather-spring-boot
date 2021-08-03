@@ -4,28 +4,17 @@ package com.assignment.spring.api;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import com.fasterxml.jackson.annotation.*;
+import lombok.*;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "coord",
-    "weather",
-    "base",
-    "main",
-    "visibility",
-    "wind",
-    "clouds",
-    "dt",
-    "sys",
-    "id",
-    "name",
-    "cod"
-})
+@ToString
 public class WeatherResponse {
 
     @JsonProperty("coord")
