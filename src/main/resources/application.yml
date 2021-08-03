@@ -21,4 +21,4 @@ resttemplate.conn.timeout: 15000
 resttemplate.read.timeout: 15000
 
 logging.level:
-  root: DEBUG
+  root: INFO
