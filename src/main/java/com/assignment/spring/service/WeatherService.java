@@ -1,6 +1,6 @@
 package com.assignment.spring.service;
 
-import com.assignment.spring.WeatherRepository;
+import com.assignment.spring.repository.WeatherRepository;
 import com.assignment.spring.api.mapper.WeatherEntityMapper;
 import com.assignment.spring.api.mapper.WeatherMapper;
 import com.assignment.spring.api.model.WeatherDTO;
