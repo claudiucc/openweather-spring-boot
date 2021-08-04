@@ -1,6 +1,17 @@
 server.port: 7105
 debug: true
 
+props:
+  app-version: 1.00
+  openweather-api:
+    app-id: 8d9c1c7055ec41a33a12e19d3921dfce
+    service-schema: http
+    host-uri: api.openweathermap.org
+    weather-context: /data/2.5/weather
+
+resttemplate.conn.timeout: 15000
+resttemplate.read.timeout: 15000
+
 spring:
   jpa:
     hibernate:
@@ -17,9 +28,6 @@ spring:
   datasource:
     name: openweather
     url: jdbc:h2:~/openweather
-
-resttemplate.conn.timeout: 15000
-resttemplate.read.timeout: 15000
 
 logging.level:
   root: INFO
