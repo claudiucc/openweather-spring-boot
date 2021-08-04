@@ -39,6 +39,7 @@ http://localhost:7105/openweather-api/v1/weather?city=Bucharest
 Access to Openweather Spring Boot api docs via Swagger:
 * SwaggerUI:  
 `http://localhost:7105/swagger-ui.html`
+
 * ApiDocs:  
 `http://localhost:7105/v3/api-docs`
 
