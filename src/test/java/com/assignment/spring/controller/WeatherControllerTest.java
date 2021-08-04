@@ -20,13 +20,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import javax.servlet.http.HttpServletRequest;
 
 import java.time.Clock;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
@@ -37,6 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.containsString;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -71,7 +70,7 @@ public class WeatherControllerTest {
     }
 
     @Test
-    public void SpringBootJPAIntegrationTest() throws Exception {
+    public void SpringBootIntegrationTest() throws Exception {
         mockMvc.perform(get("/openweather-api/v1/weather")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("city", "Bucharest"))
@@ -89,9 +88,32 @@ public class WeatherControllerTest {
     }
 
     @Test
-    public void SpringBootJPAIntegrationTest2() throws Exception {
+    public void SpringBootIntegrationTest2() throws Exception {
         WeatherDTO weatherDTO = weatherMapper.map(weatherRepository.save(buildWeatherEntity()));
         assertThat(weatherDTO.getCity(), is(equalTo("Munich")));
+    }
+
+    @Test
+    public void invalidCityReturnsInternalServerErrorTest() throws Exception {
+        MvcResult result = mockMvc.perform(get("/openweather-api/v1/weather")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("city", "a"))
+                .andExpect(status().isInternalServerError())
+                .andReturn();
+
+        assertThat(result.getResponse().getContentAsString(),
+                containsString("Weather info was not found for city: a"));
+    }
+
+    @Test
+    public void invalidParameterReturnsBadRequest() throws Exception {
+        MvcResult result = mockMvc.perform(get("/openweather-api/v1/weather")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("a", "b"))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        assertEquals(result.getResponse().getStatus(), HttpStatus.BAD_REQUEST.value());
     }
 
     @Test
