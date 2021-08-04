@@ -45,7 +45,7 @@ Access to Openweather Spring Boot api docs via Swagger:
 
 To see the data stored in the H2 database you need to access the H2 Console:
 * H2 Console:  
-`http://localhost:7105/h2-console/`
+`http://localhost:7105/h2-console/` 
 After accessing the console you should click connect to login into the H2 Console.
 
 ## Help
