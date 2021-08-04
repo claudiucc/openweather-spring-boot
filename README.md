@@ -50,6 +50,6 @@ To see the data stored in the H2 database you need to access the H2 Console:
 After accessing the console you should click connect to login into the H2 Console.
 
 ## Help
-The H2 Database was configured with the base settings, for any other custom configurations, they could be updated in application.yml
+The H2 Database was configured with the basic settings, for any other custom configurations, they could be updated in application.yml
 
 For any other questions you might have regarding this project, please email them at: cercelpc@gmail.com
