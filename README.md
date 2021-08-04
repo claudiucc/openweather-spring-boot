@@ -28,7 +28,7 @@ mvn clean install
 ```
 
 ### Call current weather data for one location by city name
-You can call by city name. It retrieves the date from OpenWeather and stores the weather data into the H2 database.
+You can call by city name. It retrieves the data from OpenWeather and stores the weather data into the H2 database.
 
 ### Example
 ```
