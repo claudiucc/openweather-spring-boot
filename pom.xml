@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.assignment</groupId>
-    <artifactId>coding-dojo-spring-boot</artifactId>
+    <artifactId>openweather-spring-boot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>openweather-spring-boot</name>
-    <description>Spring Boot Coding Dojo</description>
+    <description>Spring Boot Openweather</description>
 
     <properties>
         <java.version>11</java.version>
