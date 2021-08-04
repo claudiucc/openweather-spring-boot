@@ -14,4 +14,8 @@ public class ApplicationTests {
 	public void contextLoads() {
 	}
 
+	@Test
+	public void main() {
+		OpenWeatherApplication.main(new String[] {});
+	}
 }

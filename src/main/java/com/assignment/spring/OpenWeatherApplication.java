@@ -13,5 +13,6 @@ public class OpenWeatherApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OpenWeatherApplication.class, args);
+		log.info("Application STARTED");
 	}
 }

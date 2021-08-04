@@ -23,9 +23,6 @@ import static org.mockito.Mockito.when;
 @AutoConfigureMockMvc
 public class WeatherComponentTest {
 
-    @Autowired
-    AppConfig appConfig;
-
     @Mock
     WeatherComponent weatherComponentMock;
 
