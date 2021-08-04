@@ -16,7 +16,6 @@ import static org.junit.Assert.*;
 @SpringBootTest
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
-@Slf4j
 public class AppConfigTest {
 
     @Autowired

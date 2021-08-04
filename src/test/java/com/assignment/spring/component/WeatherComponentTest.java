@@ -1,10 +1,13 @@
 package com.assignment.spring.component;
 
 import com.assignment.spring.api.config.AppConfig;
-import com.assignment.spring.api.model.OpenweatherApi;
-import lombok.extern.slf4j.Slf4j;
+import com.assignment.spring.api.model.Main;
+import com.assignment.spring.api.model.Sys;
+import com.assignment.spring.api.model.WeatherResponse;
+import com.assignment.spring.exceptionhandler.ResourceNotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,47 +15,51 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
-@Slf4j
 public class WeatherComponentTest {
 
     @Autowired
     AppConfig appConfig;
 
+    @Mock
+    WeatherComponent weatherComponentMock;
+
+    @Autowired
+    WeatherComponent weatherComponent;
+
     @Test
-    public void testInitialization() {
-        assertEquals(appConfig.getAppVersion(), "1.0");
+    public void findWeatherInfoByCityMockTest() {
+        when(weatherComponentMock.findWeatherInfoByCity("Vienna")).thenReturn(buildWeatherResponse());
     }
 
     @Test
-    public void testConstructor() {
-        AppConfig appConfig = new AppConfig();
-        assertNotNull(appConfig);
+    public void findWeatherInfoByCityTest() {
+        WeatherResponse weatherResponse = weatherComponent.findWeatherInfoByCity("Vienna");
+        assertEquals(weatherResponse.getName(), "Vienna");
     }
 
     @Test
-    public void testBuilder() {
-        OpenweatherApi openweatherApi = OpenweatherApi.builder().appId("test27678").build();
-        assertNotNull(AppConfig.builder().toString());
-        AppConfig appConfig = AppConfig.builder()
-                .appVersion("2.0")
-                .openweatherApi(openweatherApi)
+    public void findWeatherInfoByCityNotFoundTest() {
+        boolean thrown = false;
+        try {
+            weatherComponent.findWeatherInfoByCity("test2727827");
+        } catch (ResourceNotFoundException e) {
+            thrown = true;
+            assertEquals(e.getMessage(), "Weather info was not found for city: test2727827");
+        }
+        assertTrue(thrown);
+    }
+
+    private WeatherResponse buildWeatherResponse() {
+        return WeatherResponse.builder()
+                .name("Vienna")
+                .main(Main.builder().temp(32.2).build())
+                .sys(Sys.builder().country("Austria").build())
                 .build();
-        assertNotNull(appConfig.toString());
-        assertEquals(appConfig.getAppVersion(), "2.0");
-        assertNotNull(openweatherApi.toString());
-        assertEquals(appConfig.getOpenweatherApi().getAppId(), "test27678");
-    }
-
-    @Test
-    public void testEquals() {
-        AppConfig appConfig1 = new AppConfig();
-        appConfig1.setAppVersion("1.0");
-        AppConfig appConfig2 = AppConfig.builder().appVersion("2.0").build();
-        assertFalse(appConfig1.equals(appConfig2));
     }
 }
