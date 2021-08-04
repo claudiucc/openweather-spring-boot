@@ -27,26 +27,27 @@ cd openweather-spring-boot
 mvn clean install
 ```
 
-## Call current weather data for one location
-
-# By city name
+### Call current weather data for one location by city name
 You can call by city name. It retrieves the date from OpenWeather and stores the weather data into the H2 database.
 
-# Example
+### Example
 ```
-/openweather-api/v1/weather?city=Vienna
+http://localhost:7105/openweather-api/v1/weather?city=Bucharest
 ```
 
-### The task
+## Links
+Access to Openweather Spring Boot api docs via Swagger:
+* SwaggerUI:
+`http://localhost:7105/swagger-ui.html`
+* ApiDocs:
+`http://localhost:7105/v3/api-docs`
 
-As the new engineer leading this project, your first task is to make it production-grade, feel free to refactor any piece
-necessary to achieve the goal.
+To see the data stored in the H2 database you need to access the H2 Console:
+* H2 Console:
+`http://localhost:7105/h2-console/`
+After accessing the console you should click connect to login into the H2 Console.
 
-### How to deliver the code
+## Help
+The H2 Database was configured with the base settings, for any other custom configurations, they could be updated in application.yml
 
-Please send an email containing your solution with a link to a public repository.
-
->**DO NOT create a Pull Request with your solution** 
-
-### Footnote
-It's possible to generate the API key going to the [OpenWeather Sign up](https://openweathermap.org/appid) page.
+For any other questions you might have regarding this project, please email them at: cercelpc@gmail.com
