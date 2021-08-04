@@ -1,6 +1,5 @@
 package com.assignment.spring.component;
 
-import com.assignment.spring.api.config.AppConfig;
 import com.assignment.spring.api.model.Main;
 import com.assignment.spring.api.model.Sys;
 import com.assignment.spring.api.model.WeatherResponse;

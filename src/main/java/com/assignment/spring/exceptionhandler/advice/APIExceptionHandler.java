@@ -13,7 +13,7 @@ import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 
 @ControllerAdvice
-public class WeatherControllerExceptionAdvice extends ResponseEntityExceptionHandler {
+public class APIExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<ErrorDTO> handleSizeException(ResponseStatusException exception) {
