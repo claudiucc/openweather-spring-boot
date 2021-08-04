@@ -7,9 +7,12 @@ public class WeatherEntityMapper {
 
     public static WeatherEntity map(WeatherResponse response) {
         WeatherEntity entity = new WeatherEntity();
-        entity.setCity(response.getName());
-        entity.setCountry(response.getSys().getCountry());
-        entity.setTemperature(response.getMain().getTemp());
+        if(response.getName() != null)
+            entity.setCity(response.getName());
+        if(response.getSys() != null && response.getSys().getCountry() != null)
+            entity.setCountry(response.getSys().getCountry());
+        if(response.getMain() != null && response.getMain().getTemp() != null)
+            entity.setTemperature(response.getMain().getTemp());
 
         return entity;
     }
