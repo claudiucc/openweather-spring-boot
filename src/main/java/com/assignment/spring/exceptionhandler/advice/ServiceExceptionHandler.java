@@ -6,11 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 
@@ -32,15 +30,23 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorDTO> handleException(Exception ex,
-                                                    HttpServletRequest request,
-                                                    HttpServletResponse response) {
-        if (ex instanceof NullPointerException) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ErrorDTO> handleException(Exception e) {
+
+        if(e instanceof HttpClientErrorException.BadRequest) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(buildResourceNotFoundException(e.getMessage()));
         }
+
+        if(e instanceof HttpClientErrorException.NotFound) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(buildResourceNotFoundException(e.getMessage()));
+        }
+
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .build();
+                .body(buildResourceNotFoundException(e.getMessage()));
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
