@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import javax.validation.ConstraintViolationException;
+import jakarta.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 
 @ControllerAdvice
@@ -18,7 +18,7 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<ErrorDTO> handleSizeException(ResponseStatusException exception) {
         return ResponseEntity
-                .status(exception.getStatus())
+                .status(exception.getStatusCode())
                 .body(buildResourceNotFoundException(buildResourceNotFoundExceptionMessage(exception)));
     }
 
@@ -64,7 +64,7 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     private String buildResourceNotFoundExceptionMessage(ResponseStatusException exception) {
-        if (exception.getStatus().equals(HttpStatus.NOT_FOUND)) {
+        if (exception.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
             return "Could not find the provided city.";
         }
         return "There has been an ResourceNotFoundException while processing your request.";

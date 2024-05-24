@@ -20,6 +20,19 @@ resttemplate.conn.timeout: 15000
 resttemplate.read.timeout: 15000
 
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          openweather-api-client:
+            provider: openweather-api-provider
+            client-id: openweather-api
+            client-secret: "{noop}openweather-secret"
+            authorization-grant-type: "client_credentials"
+            scope: "read,write"
+        provider:
+          openweather-api-provider:
+            issuer-uri: http://localhost:8090
   jpa:
     hibernate:
       ddl-auto: create
